@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmode="clr-namespace:project_mvvm_flower.ViewModels"
+             x:Class="project_mvvm_flower.Views.ListFlowerTypesPage">
+
+    <ContentPage.BindingContext>
+        <viewmode:ListFlowerTypesViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Text="Tên loại:" Grid.Row="0" Grid.Column="0"/>
+            <Entry Text="{Binding flowerType.name, Mode=TwoWay}" Grid.Row="0" Grid.Column="1"/>
+            <Button Text="Insert" VerticalOptions="Center" Grid.Row="1" Grid.Column="0"
+                    Command="{Binding AddFlowerType}"/>
+            <Button Text="Update" VerticalOptions="Center" Grid.Row="1" Grid.Column="1"
+                    Command="{Binding UpdateFlowerType}"/>
+
+            <ListView x:Name="lstFlowerTypes" VerticalOptions="Center"
+                      ItemsSource="{Binding listFlowerTypes}" SelectedItem="{Binding flowerType, Mode=TwoWay}"
+                      Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding id, Mode=TwoWay}" Detail="{Binding name, Mode=TwoWay}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
